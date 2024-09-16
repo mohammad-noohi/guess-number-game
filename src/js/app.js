@@ -14,6 +14,8 @@ const highScoreElem = $.querySelector(".highscore");
 let highScore = localStorage.getItem("bestScore") ?? "0";
 highScoreElem.textContent = highScore;
 let score = 20;
+const secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
+
 
 // Functions --------------------------------------------------
 function displayMessage(message) {
@@ -30,13 +32,11 @@ function resetGame() {
   highScore = localStorage.getItem("bestScore") || "0";
   highScoreElem.textContent = highScore;
   input.value = "";
-  highScore = localStorage.getItem("bestScore") ?? "0";
-  highScoreElem.textContent = highScore;
-  score = 20;
+  // generate new random number
+  secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
 }
 // Events -----------------------------------------------------
 
-const secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
 
 checkBtn.addEventListener("click", e => {
   const guess = +input.value; // number type
