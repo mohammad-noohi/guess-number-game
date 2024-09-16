@@ -30,6 +30,9 @@ function resetGame() {
   highScore = localStorage.getItem("bestScore") || "0";
   highScoreElem.textContent = highScore;
   input.value = "";
+  highScore = localStorage.getItem("bestScore") ?? "0";
+  highScoreElem.textContent = highScore;
+  score = 20;
 }
 // Events -----------------------------------------------------
 
