@@ -16,46 +16,11 @@ highScoreElem.textContent = highScore;
 let score = 20;
 
 // Functions --------------------------------------------------
+function displayMessage(message) {
+  messageElem.textContent = message;
+}
 
-// Events -----------------------------------------------------
-
-const secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
-console.log("secret:", secretNumber);
-
-checkBtn.addEventListener("click", e => {
-  const guess = +input.value; // number type
-  if (!guess) {
-    messageElem.textContent = "⛔ wrong number";
-  } else {
-    if (guess === secretNumber) {
-      numberElem.textContent = secretNumber;
-      numberElem.style = "width: 30rem";
-      messageElem.textContent = "🎉 correct";
-      body.style = "background-color: #60b347;";
-
-      if (score > highScore) {
-        highScore = score;
-        localStorage.setItem("bestScore", highScore);
-        highScoreElem.textContent = highScore;
-      }
-    } else {
-      if (score > 1) {
-        if (guess > secretNumber) {
-          messageElem.textContent = "📈 to high";
-        } else if (guess < secretNumber) {
-          messageElem.textContent = "📉 to low";
-        }
-        score--;
-        scoreElem.textContent = score;
-      } else {
-        messageElem.textContent = "💥you lost the game";
-        scoreElem.textContent = "0";
-      }
-    }
-  }
-});
-
-againBtn.addEventListener("click", e => {
+function resetGame() {
   body.style = "background-color: #222222;";
   messageElem.textContent = "start guessing...";
   score = 20;
@@ -65,4 +30,38 @@ againBtn.addEventListener("click", e => {
   highScore = localStorage.getItem("bestScore") || "0";
   highScoreElem.textContent = highScore;
   input.value = "";
+}
+// Events -----------------------------------------------------
+
+const secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
+
+checkBtn.addEventListener("click", e => {
+  const guess = +input.value; // number type
+  if (!guess) {
+    displayMessage("⛔ wrong number");
+  } else {
+    if (guess === secretNumber) {
+      numberElem.textContent = secretNumber;
+      numberElem.style = "width: 30rem";
+      displayMessage("🎉 correct");
+      body.style = "background-color: #60b347;";
+
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("bestScore", highScore);
+        highScoreElem.textContent = highScore;
+      }
+    } else {
+      if (score > 1) {
+        displayMessage(guess > secretNumber ? "📈 to high" : "📉 to low");
+        score--;
+        scoreElem.textContent = score;
+      } else {
+        displayMessage("💥you lost the game");
+        scoreElem.textContent = "0";
+      }
+    }
+  }
 });
+
+againBtn.addEventListener("click", resetGame);

@@ -89,6 +89,7 @@ body {
   width: 15rem;
   height: 12rem;
   font-size: 6rem;
+  transition: width 200ms ease;
 }
 
 /* Main */
