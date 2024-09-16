@@ -34,7 +34,6 @@ function resetGame() {
   input.value = "";
   // generate new random number
   secretNumber = Math.floor(Math.random() * 20) + 1; // 1 - 20
-  alert(secretNumber)
 }
 // Events -----------------------------------------------------
 
